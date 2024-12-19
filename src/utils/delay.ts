@@ -1,1 +1,3 @@
-export const delay = (t) => new Promise((res) => setTimeout(res, t));
+export type Delay<T> = (t:T) => Promise<T>
+
+export const delay:Delay<number> = (t) => new Promise((res) => setTimeout(res, t));

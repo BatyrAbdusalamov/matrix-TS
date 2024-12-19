@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import HomePage from './pages/HomePage';
-import { loadSettings, saveSettings } from './utils';
+import { loadSettings} from './utils';
 
-export const App = () => {
+export const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
