@@ -10,13 +10,13 @@ import { MockFistOptions } from '../api/mock/firstOptions';
 import { MockSecondOption } from '../api/mock/secondOptions';
 import { Theme } from '../Global';
 
-const HomePage: React.FC = () => {
-  const [theme, setTheme] = useState<Theme>(window.appSettings.theme);
+const HomePage: React.FC /*TODO*/ = () => {
+  const [theme, setTheme] = useState<Theme>(window.appSettings.theme); // TODO
 
   const [firstOptions, setFirstOtions] = useState<MockFistOptions[]>([]);
   const [selectedFirstOption, setSelectedFirstOption] = useState<MockFistOptions | null>(null);
 
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string>(''); // TODO
 
   const [secondOptions, setSecondOptions] = useState<MockSecondOption[]>([]);
   const [selectedSecondOption, setSelectedSecondOption] = useState<MockSecondOption | null>(null);

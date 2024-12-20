@@ -9,10 +9,10 @@ type Path = '/first' | '/second';
 export interface Request {
   (path: '/second', data: Payload): Promise<MockSecondOption[]>;
   (path: '/first'): Promise<MockFistOptions[]>;
-};
+}; // TODO 
 
 
-export const request: Request = async (
+export const request: Request = async ( // TODO
   path: Path,
   data: Payload
 ): Promise<MockFistOptions[] | MockSecondOption[]> => {

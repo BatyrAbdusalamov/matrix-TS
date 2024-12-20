@@ -7,7 +7,7 @@ type ButtonType = 'button' | 'submit'
 interface ButtonProps {
   children: ReactNode; // Button content
   variant?: ButtonVariant; // Optional button variant, default is "primary"
-  disabled?: boolean; // Optional disabled state, default is `false`
+  disabled?: boolean; // Optional disabled state, default is `false` // TODO
   outlined?: boolean; // Optional outlined state, default is `false`
   onClick: ButtonType extends 'button'? () => void : (e: React.MouseEvent<HTMLButtonElement>) => void; // Click handler
   type?: ButtonType; // Optional button type, default is "button"

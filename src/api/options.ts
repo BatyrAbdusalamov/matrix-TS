@@ -1,4 +1,4 @@
-import { MockSecondOption } from './mock/secondOptions';
+import { MockSecondOption } from './mock/secondOptions'; // TODO
 import { request } from './request';
 export const getFirstOptions = async () => request('/first');
 

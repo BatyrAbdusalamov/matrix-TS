@@ -9,5 +9,6 @@ export const App: React.FC = () => {
     loadSettings();
     setIsLoading(false);
   }, []);
+  
   return <div>{isLoading ? <p>Loading....</p> : <HomePage />}</div>;
 };
