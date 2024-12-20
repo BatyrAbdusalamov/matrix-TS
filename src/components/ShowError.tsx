@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, FC } from 'react';
 
 interface ShowErrorProps { 
   children: ReactNode;
@@ -7,7 +7,7 @@ interface ShowErrorProps {
   show: boolean;
 }
 
-const ShowError: React.FC<ShowErrorProps> = (props) => {
+const ShowError: FC<ShowErrorProps> = (props) => {
   const { children, onHide, delay = 5000, show } = props;
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const ShowError: React.FC<ShowErrorProps> = (props) => {
 
       return () => clearTimeout(timer);
     }
-  }, [show, delay]);
+  }, [show, delay, onHide]);
 
   return <div>{children}</div>;
 };

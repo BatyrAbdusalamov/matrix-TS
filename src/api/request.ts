@@ -5,17 +5,13 @@ import { MockSecondOption } from './mock/secondOptions';
 import { Payload } from './options';
 
 type Path = '/first' | '/second';
-
-export interface Request {
-  (path: '/second', data: Payload): Promise<MockSecondOption[]>;
-  (path: '/first'): Promise<MockFistOptions[]>;
-}; // TODO 
+export type Request = (path: Path, data?: Payload) => Promise<MockSecondOption[] | MockFistOptions[]>;
 
 
-export const request: Request = async ( // TODO
-  path: Path,
-  data: Payload
-): Promise<MockFistOptions[] | MockSecondOption[]> => {
+export const request: Request = async (
+  path,
+  data
+) => {
   await delay(window.appSettings.requestDelay);
   const chanceToSuccess = Math.random();
   if (

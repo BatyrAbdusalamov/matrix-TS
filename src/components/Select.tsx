@@ -1,3 +1,4 @@
+import { ChangeEvent, FC } from "react";
 import { MockFistOptions } from "../api/mock/firstOptions";
 import { MockSecondOption } from "../api/mock/secondOptions";
 
@@ -12,7 +13,7 @@ interface SelectProps {
   onChange: OnChange ;
 }
 
-const Select: React.FC<SelectProps> = (props) => {
+const Select: FC<SelectProps> = (props) => {
   const {
     name = '',
     labelKey = 'name',
@@ -22,7 +23,7 @@ const Select: React.FC<SelectProps> = (props) => {
     onChange,
   } = props;
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
     const option = options.find((item) => item[valueKey as keyof typeof item] === value) ?? null;
     onChange(option);

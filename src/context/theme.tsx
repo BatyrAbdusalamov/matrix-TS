@@ -8,5 +8,4 @@ export const ThemeContext = createContext<ThemeContextValue>([
   () => null,
 ]);
 
-// Export the ThemeProvider for use in components // TODO
 export const ThemeProvider = ThemeContext.Provider;

@@ -4,11 +4,7 @@ export interface MockSecondOption {
   value: string
 }
 
-export interface MockSecondOptions { // TODO
-  [key:number]: MockSecondOption[]
-}
-
-// type MockSecondOptions = Record<number, MockSecondOption[]>
+export type MockSecondOptions = Record<number, MockSecondOption[]>
 
 export const MOCK_SECOND_OPTIONS: MockSecondOptions = {
   1: [

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { getFirstOptions, getSecondOptions } from '../api';
 import Button from '../components/Button';
 import Select, { OnChange } from '../components/Select';
@@ -10,13 +10,13 @@ import { MockFistOptions } from '../api/mock/firstOptions';
 import { MockSecondOption } from '../api/mock/secondOptions';
 import { Theme } from '../Global';
 
-const HomePage: React.FC /*TODO*/ = () => {
-  const [theme, setTheme] = useState<Theme>(window.appSettings.theme); // TODO
+const HomePage: FC = () => {
+  const [theme, setTheme] = useState(window.appSettings.theme);
 
   const [firstOptions, setFirstOtions] = useState<MockFistOptions[]>([]);
   const [selectedFirstOption, setSelectedFirstOption] = useState<MockFistOptions | null>(null);
 
-  const [error, setError] = useState<string>(''); // TODO
+  const [error, setError] = useState('');
 
   const [secondOptions, setSecondOptions] = useState<MockSecondOption[]>([]);
   const [selectedSecondOption, setSelectedSecondOption] = useState<MockSecondOption | null>(null);
@@ -26,7 +26,7 @@ const HomePage: React.FC /*TODO*/ = () => {
   const getOptions = async () => {
     try {
       const data = await getFirstOptions();
-      setFirstOtions(data);
+      setFirstOtions(data as MockFistOptions[]);
     } catch (error) {
       setError(String(error));
     }
@@ -44,7 +44,7 @@ const HomePage: React.FC /*TODO*/ = () => {
       setSelectedSecondOption(null);
     }
 
-    const data: MockSecondOption[] = await getSecondOptions({ id: value?.id ? value.id : null });
+    const data = await getSecondOptions({ id: value?.id ? value.id : null }) as MockSecondOption[];
     setSecondOptions(data);
   };
 

@@ -5,7 +5,7 @@ type LoadSettings = () => void;
 type Settings<T> = T extends 'theme'? ThemeValue : number
 type SaveSettings = <T extends keyof AppSettings>(key:T, settings:Settings<T>) => void;
 
-export const loadSettings:LoadSettings = () => {
+export const loadSettings: LoadSettings = () => {
   try {
     const rawSettings: string | null = localStorage.getItem('app-settings');
     if (rawSettings == null) throw new Error();
@@ -20,7 +20,7 @@ export const loadSettings:LoadSettings = () => {
   }
 };
 
-export const saveSettings:SaveSettings= (key, settings) => {
+export const saveSettings: SaveSettings= (key, settings) => {
   window.appSettings[key] = settings as AppSettings[typeof key];
   localStorage.setItem('app-settings', JSON.stringify(window.appSettings));
 };
