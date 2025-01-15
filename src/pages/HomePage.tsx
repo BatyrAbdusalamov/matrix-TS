@@ -1,31 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { getFirstOptions, getSecondOptions } from '../api';
 import Button from '../components/Button';
-import Select from '../components/Select';
+import Select, { OnChange } from '../components/Select';
 import ShowError from '../components/ShowError';
 import { ThemeProvider } from '../context/theme';
 import { useForm } from '../hooks';
 import { saveSettings } from '../utils';
+import { MockFistOptions } from '../api/mock/firstOptions';
+import { MockSecondOption } from '../api/mock/secondOptions';
+import { Theme } from '../Global';
 
-const HomePage = () => {
+const HomePage: FC = () => {
   const [theme, setTheme] = useState(window.appSettings.theme);
 
-  const [firstOptions, setFirstOtions] = useState([]);
-  const [selectedFirstOption, setSelectedFirstOption] = useState(null);
+  const [firstOptions, setFirstOtions] = useState<MockFistOptions[]>([]);
+  const [selectedFirstOption, setSelectedFirstOption] = useState<MockFistOptions | null>(null);
 
   const [error, setError] = useState('');
 
-  const [secondOptions, setSecondOptions] = useState([]);
-  const [selectedSecondOption, setSelectedSecondOption] = useState(null);
+  const [secondOptions, setSecondOptions] = useState<MockSecondOption[]>([]);
+  const [selectedSecondOption, setSelectedSecondOption] = useState<MockSecondOption | null>(null);
 
   const [nameForm, setName] = useForm({ firstName: '', lastName: '' });
 
   const getOptions = async () => {
     try {
       const data = await getFirstOptions();
-      setFirstOtions(data);
+      setFirstOtions(data as MockFistOptions[]);
     } catch (error) {
-      setError(error);
+      setError(String(error));
     }
   };
 
@@ -33,21 +36,25 @@ const HomePage = () => {
     getOptions();
   }, []);
 
-  const onChangeFirstOption = async (value) => {
+  const onChangeFirstOption: OnChange = async (value) => {
+    if(!value){
     setSelectedFirstOption(value);
+    }
     if (value == null) {
       setSelectedSecondOption(null);
     }
 
-    const data = await getSecondOptions({ id: value.id });
+    const data = await getSecondOptions({ id: value?.id ? value.id : null }) as MockSecondOption[];
     setSecondOptions(data);
   };
 
-  const onChangeSecondOption = (value) => {
+  const onChangeSecondOption: OnChange = async (value) => {
+    if(!value){
     setSelectedSecondOption(value);
+    }
   };
 
-  const handleChangeNameForm = (event) => {
+  const handleChangeNameForm = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setName(name, value);
   };
@@ -57,13 +64,13 @@ const HomePage = () => {
     getOptions();
   };
 
-  const saveForm = (e) => {
+  const saveForm = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
   };
 
   const toggleTheme = () => {
     setTheme((prev) => {
-      const next = prev === 'light' ? 'dark' : 'light';
+      const next: Theme = prev === "light" ? 'dark' : 'light';
       saveSettings('theme', next);
       return next;
     });

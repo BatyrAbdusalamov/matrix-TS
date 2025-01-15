@@ -1,9 +1,22 @@
+import { ReactNode, MouseEvent, FC } from 'react';
 import { useTheme } from '../hooks';
 
-const Button = (props) => {
+type ButtonVariant = 'secondary' | 'primary'
+type ButtonType = 'button' | 'submit'
+
+interface ButtonProps {
+  children: ReactNode;
+  variant?: ButtonVariant;
+  disabled?: boolean;
+  outlined?: boolean;
+  onClick: ButtonType extends 'button'? () => void : (e: MouseEvent<HTMLButtonElement>) => void;
+  type?: ButtonType;
+}
+
+const Button: FC<ButtonProps> = (props) => {
   const {
     children,
-    variant = 'primary', // secondary, warn, error
+    variant = 'primary',
     disabled = false,
     outlined = false,
     onClick,

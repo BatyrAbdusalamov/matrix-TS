@@ -1,4 +1,12 @@
-export const MOCK_SECOND_OPTIONS = {
+export interface MockSecondOption {
+  id: number,
+  label: string,
+  value: string
+}
+
+export type MockSecondOptions = Record<number, MockSecondOption[]>
+
+export const MOCK_SECOND_OPTIONS: MockSecondOptions = {
   1: [
     { id: 1, label: 'A-A', value: 'aa' },
     { id: 2, label: 'A-B', value: 'ab' },

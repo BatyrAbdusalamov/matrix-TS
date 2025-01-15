@@ -1,5 +1,9 @@
 import { request } from './request';
 
-export const getFirstOptions = async () => request('/first');
 
-export const getSecondOptions = async (payload) => request('/second', payload);
+export interface Payload {
+    id: number | null;
+}
+
+export const getFirstOptions = async () => request('/first');
+export const getSecondOptions = async (payload: Payload) => request('/second', payload);

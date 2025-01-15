@@ -1,4 +1,19 @@
-const Select = (props) => {
+import { ChangeEvent, FC } from "react";
+import { MockFistOptions } from "../api/mock/firstOptions";
+import { MockSecondOption } from "../api/mock/secondOptions";
+
+export type OnChange = <T extends (MockSecondOption | MockFistOptions)>(value:T | null) => Promise<void>
+type Option = MockFistOptions | MockSecondOption
+interface SelectProps {
+  name?: string;
+  labelKey?: keyof (MockFistOptions & MockSecondOption);
+  valueKey?: string;
+  options: Option[];
+  selected: Option | null;
+  onChange: OnChange ;
+}
+
+const Select: FC<SelectProps> = (props) => {
   const {
     name = '',
     labelKey = 'name',
@@ -8,10 +23,10 @@ const Select = (props) => {
     onChange,
   } = props;
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
-    const option = options.find((item) => item[valueKey] === value) ?? null;
-    onChange(option, event);
+    const option = options.find((item) => item[valueKey as keyof typeof item] === value) ?? null;
+    onChange(option);
   };
 
   return (
@@ -22,10 +37,10 @@ const Select = (props) => {
       {options.map((item) => (
         <option
           key={item.id}
-          value={item[valueKey]}
+          value={item[valueKey as keyof typeof item]}
           defaultValue={selected?.value}
         >
-          {item[labelKey]}
+          {item[labelKey as keyof typeof item]}
         </option>
       ))}
     </select>
